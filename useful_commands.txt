@@ -1,0 +1,5 @@
+go get -u -v -f all
+# Install from scratch
+go mod init
+go mod download
+go mod tidy
