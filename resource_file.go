@@ -49,6 +49,9 @@ func resourceFileUpdate(d *schema.ResourceData, m interface{}) error {
 }
 
 func resourceFileDelete(d *schema.ResourceData, m interface{}) error {
+  // d.SetId("") is automatically called assuming delete returns no errors, but
+        // it is added here for explicitness.
+        d.SetId("")
         return nil
 }
 
