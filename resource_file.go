@@ -11,13 +11,15 @@ func resourceFile() *schema.Resource {
   return &schema.Resource{
     Create: resourceFileCreate,
     Read:   resourceFileRead,
-    Update: resourceFileUpdate,
+//    Update: resourceFileUpdate,
     Delete: resourceFileDelete,
 
     Schema: map[string]*schema.Schema{
       "path": &schema.Schema{
         Type:     schema.TypeString,
         Required: true,
+        ForceNew: true,
+        ///        Computed: true,
       },
     },
   }
