@@ -87,6 +87,10 @@ func resourceFileDelete(d *schema.ResourceData, m interface{}) error {
   // it is added here for explicitness.
   d.SetId("")
   path := d.Get("path").(string)
+  _,fileError := os.Stat(path)
+  if fileError != nil {
+  return nil
+  }
   var err = os.Remove(path)
   return err
 }
