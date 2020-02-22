@@ -8,42 +8,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/terraform"
 )
 
-/*
-func init() {
-	resource.AddTestSweepers("digitalocean_floating_ip", &resource.Sweeper{
-		Name: "digitalocean_floating_ip",
-		F:    testSweepFloatingIps,
-	})
-
-}
-
-func testSweepFloatingIps(region string) error {
-	meta, err := sharedConfigForRegion(region)
-	if err != nil {
-		return err
-	}
-
-	client := meta.(*CombinedConfig).godoClient()
-
-	ips, _, err := client.FloatingIPs.List(context.Background(), nil)
-	if err != nil {
-		return err
-	}
-
-	for _, ip := range ips {
-		if _, err := client.FloatingIPs.Delete(context.Background(), ip.IP); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-*/
 func TestExample_File_Creation(t *testing.T) {
 
 	resource.Test(t, resource.TestCase{
-		// PreCheck:     func() { testAccPreCheck(t) },
-		// Providers:    testAccProviders,
 		CheckDestroy: testAccCheckFileDestroyed,
 		Steps: []resource.TestStep{
 			{

@@ -19,7 +19,6 @@ func resourceFile() *schema.Resource {
 			"path": &schema.Schema{
 				Type:     schema.TypeString,
 				Required: true,
-				///        Computed: true,
 			},
 		},
 	}
@@ -44,21 +43,6 @@ func resourceFileRead(d *schema.ResourceData, m interface{}) error {
 }
 
 func resourceFileUpdate(d *schema.ResourceData, m interface{}) error {
-	/*
-	  d.Partial(true)
-
-	  if d.HasChange("path") {
-	    // Try updating the address
-	    if err := updatePath(d, m); err != nil {
-	      return err
-	    }
-
-	    d.SetPartial("path")
-	  }
-
-	  d.Partial(false)
-	  return resourceFileRead(d, m)
-	*/
 	oldPath, newPath := d.GetChange("path")
 	if !strings.HasPrefix(newPath.(string), "./") {
 		return fmt.Errorf("File path should start with ./")
@@ -70,20 +54,10 @@ func resourceFileUpdate(d *schema.ResourceData, m interface{}) error {
 	}
 	d.SetId(newPath.(string))
 	d.Set("path", newPath)
-
-	/*         if d.HasChange("path") {
-	  // Try updating the address
-	  if err := updatePath(d, m); err != nil {
-	    return err
-	  }
-
-	}*/
 	return resourceFileCreate(d, m)
 }
 
 func resourceFileDelete(d *schema.ResourceData, m interface{}) error {
-	// d.SetId("") is automatically called assuming delete returns no errors, but
-	// it is added here for explicitness.
 	d.SetId("")
 	path := d.Get("path").(string)
 	_, fileError := os.Stat(path)
@@ -92,12 +66,4 @@ func resourceFileDelete(d *schema.ResourceData, m interface{}) error {
 	}
 	var err = os.Remove(path)
 	return err
-}
-
-func updatePath(d *schema.ResourceData, m interface{}) error {
-	path := d.Get("path").(string)
-	if !strings.HasPrefix(path, "./") {
-		return fmt.Errorf("File path should start with ./")
-	}
-	return nil
 }
