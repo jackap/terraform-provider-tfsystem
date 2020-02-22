@@ -1,4 +1,4 @@
-module plugin-example/m/v2
+module github.com/jackap/terraform-provider-tfsystem
 
 go 1.13
 
